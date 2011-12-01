@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if ($_SESSION['phplogin'] != true){
+    header('Location: login.php');
+    }
+?>
 <!DOCTYPE>
 <html>
 <head>
@@ -54,7 +60,7 @@
                  <div class="advertise-box">Advertise Here</div>
             </div>  
             <div class="main-content">
-                <h1>Hello Stranger</h1>
+                <h1>Welcome <?php print($_SESSION['usernm']) ?></h1>
                 <p>Welcome to Onyx blah blah. Lorem ipsum dolor amet, consectetur 
                  adipiscing elit.  at nisi gravida aliquam nec semper quam. Vivamus 
                  ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, 

@@ -1,34 +1,34 @@
-<!DOCTYPE>
 <?php
-session_start();
-
-if(isset($_POST['login'])){	
-	$password = $_POST['myPassword'];
-	$username = $_POST['myUsername'];
-	$dbuser = "svadgam1_202user";
-	$dbpass = "clearnet";
-	$connection = mysql_connect('localhost', $dbuser, $dbpass);
-	$Sql = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'";	
-	mysql_select_db('svadgam1_202');
-	$query = mysql_query($Sql);
-	mysql_close($connection);
-	$results = mysql_fetch_array($query);
-
-/*Woo! so login works and does a whole bunch of session stuff that I can reference it in other pages*/	
-
-	if ($results){
-			$_SESSION['phplogin'] = true;
-			$_SESSION['loginCheck'] = false;
-			$_SESSION['usernm'] = $_POST['myUsername'];
-			$_SESSION['userID'] = $results['MemberID'];
-			header('Location: index.php');
-		}
-		else {
-			$_SESSION['loginCheck'] = true;
-			header('location: login.php');
-		}
-}
+	session_start();
+	
+	if(isset($_POST['login'])){	
+		$password = $_POST['myPassword'];
+		$username = $_POST['myUsername'];
+		$dbuser = "svadgam1_202user";
+		$dbpass = "clearnet";
+		$connection = mysql_connect('localhost', $dbuser, $dbpass);
+		$Sql = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $password . "'";	
+		mysql_select_db('svadgam1_202');
+		$query = mysql_query($Sql);
+		mysql_close($connection);
+		$results = mysql_fetch_array($query);
+	
+	/*Woo! so login works and does a whole bunch of session stuff that I can reference it in other pages*/	
+	
+		if ($results){
+				$_SESSION['phplogin'] = true;
+				$_SESSION['loginCheck'] = false;
+				$_SESSION['usernm'] = $_POST['myUsername'];
+				$_SESSION['userID'] = $results['MemberID'];
+				header('Location: index.php');
+			}
+			else {
+				$_SESSION['loginCheck'] = true;
+				header('location: login.php');
+			}
+	}
 ?>
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -84,31 +84,18 @@ if(isset($_POST['login'])){
                  <div class="advertise-box">Advertise Here</div>
             </div>  
             <div class="main-content">
-                <h1>Contact</h1>
+                <h1>Client Login</h1>
                 
-                <p>Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.  at nisi gravida aliquam nec semper quam. Vivamus 
-                 ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, 
-                 consectetur adipiscing elit.  at nisi gravida aliquam nec semper 
-                 quam. Vivamus ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.  at nisi gravida aliquam nec semper quam. Vivamus 
-                 ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, 
-                 consectetur adipiscing elit.  at nisi gravida aliquam nec semper 
-                 quam. Vivamus ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.</p>
-                 
-                 <p>Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.  at nisi gravida aliquam nec semper quam. Vivamus 
-                 ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, 
-                 consectetur adipiscing elit.  at nisi gravida aliquam nec semper 
-                 quam. Vivamus ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.  at nisi gravida aliquam nec semper quam. Vivamus 
-                 ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, 
-                 consectetur adipiscing elit.  at nisi gravida aliquam nec semper 
-                 quam. Vivamus ac mauris tellus sit mauris tellus sit. Lorem ipsum dolor amet, consectetur 
-                 adipiscing elit.</p>
+                 <p>Welcome to the client area. Please login below.</p>
                 
-                               <form class="register" method="post" action="">
+		<?php
+			if(isset($_SESSION['loginCheck'])){
+				if($_SESSION['loginCheck'] == true){
+					echo "<br/>Login details incorrect, please try again";
+				}
+			}
+		?>
+		<form class="register" method="post" action="">
                    <label for="name">Username:</label><input name="myUsername" placeholder="Username..." type="text"></input><br>
                    <label for="email">Password:</label><input name="myPassword" placeholder="Password..." type="password"></input><br>
                    <input name="login" value="Login" type="submit"></input>
