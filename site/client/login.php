@@ -28,7 +28,7 @@
 			}
 	}
 ?>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,6 +38,7 @@
 
 <body>
     <header>
+    	<div class="gradient"></div>
      	<div id="page-wrap">
             <div class="logo"><h1>Onyx Designs</h1></div>
         	<nav>
